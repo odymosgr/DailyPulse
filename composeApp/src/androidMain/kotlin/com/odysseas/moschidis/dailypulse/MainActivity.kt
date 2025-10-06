@@ -15,7 +15,7 @@ class MainActivity : ComponentActivity() {
         Platform().logSystemInfo()
 
         setContent {
-            App()
+            AboutScreen()
         }
     }
 }
@@ -23,5 +23,5 @@ class MainActivity : ComponentActivity() {
 @Preview
 @Composable
 fun AppAndroidPreview() {
-    App()
+    AboutScreen()
 }
