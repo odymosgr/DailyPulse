@@ -1,6 +1,7 @@
 # DailyPulse
 Educational repo for the udemy course Kotlin Multiplatform Masterclass, by Petros Efthymiou.
 The course aims to teach the state-of-art KMP development.
+Based on the repo [courseRepo](https://github.com/petros-efthymiou/DailyPulse) but with 2025 KMP setup
 
 Daily Pulse includes a native Android and a native iOS apps, where the business logic and inftrastructure is shared in a KMP module.
 

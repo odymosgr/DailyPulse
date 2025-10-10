@@ -5,8 +5,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ArticlesResponse (
-    @SerialName("name")
-    val name: String,
+    @SerialName("status")
+    val status: String,
     @SerialName("totalResults")
     val totalResults: Int,
     @SerialName("articles")

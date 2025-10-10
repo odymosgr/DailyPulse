@@ -33,11 +33,12 @@ import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.odysseas.moschidis.dailypulse.atricles.Article
 import com.odysseas.moschidis.dailypulse.atricles.ArticlesViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun ArticlesScreen(
     onAboutButtonClick: () -> Unit,
-    articlesViewModel: ArticlesViewModel,
+    articlesViewModel: ArticlesViewModel = koinViewModel(),
 ) {
     val articlesState = articlesViewModel.articlesState.collectAsState()
 
@@ -137,9 +138,3 @@ fun ErrorMessage(message: String) {
         )
     }
 }
-
-
-
-
-
-

@@ -15,7 +15,6 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
-        val articlesViewModel : ArticlesViewModel by viewModels()
 
         setContent {
             MaterialTheme {
@@ -23,7 +22,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    AppScaffold(articlesViewModel = articlesViewModel)
+                    AppScaffold()
                 }
             }
         }

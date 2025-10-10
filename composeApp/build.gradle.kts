@@ -1,6 +1,4 @@
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -29,17 +27,6 @@ kotlin {
     }
     
     sourceSets {
-        val commonMain by getting
-        val appleMain by creating {
-            dependsOn(commonMain) // <--- FIX: No cast needed
-        }
-        val iosArm64Main by getting {
-            dependsOn(appleMain)
-        }
-        val iosSimulatorArm64Main by getting {
-            dependsOn(appleMain)
-        }
-
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
@@ -48,6 +35,8 @@ kotlin {
             implementation(libs.coil.network.okhttp)
             implementation(libs.androidx.navigation.compose)
             implementation(libs.ktor.client.okhttp)
+            implementation(libs.koin.android)
+            implementation(libs.koin.androidx.compose)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -62,8 +51,12 @@ kotlin {
             implementation(libs.ktor.client.core)
             implementation(libs.ktor.client.content.negotiation)
             implementation(libs.ktor.serialization.kotlinx.json)
+            implementation(libs.kotlinx.datetime)
+            implementation(project.dependencies.platform(libs.koin.bom))
+            implementation(libs.koin.core)
+            implementation(libs.koin.compose)
         }
-        appleMain.dependencies {
+        iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
         }
         commonTest.dependencies {
