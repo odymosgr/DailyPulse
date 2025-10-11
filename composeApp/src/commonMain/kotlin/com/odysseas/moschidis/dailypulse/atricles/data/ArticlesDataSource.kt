@@ -1,4 +1,4 @@
-package com.odysseas.moschidis.dailypulse.atricles
+package com.odysseas.moschidis.dailypulse.atricles.data
 
 import com.odysseas.moschidis.dailypulse.db.DailyPulseDatabase
 

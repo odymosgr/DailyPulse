@@ -1,4 +1,4 @@
-package com.odysseas.moschidis.dailypulse.atricles
+package com.odysseas.moschidis.dailypulse.atricles.application
 
 data class Article (
     val title: String,

@@ -9,7 +9,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.odysseas.moschidis.dailypulse.atricles.ArticlesViewModel
 import com.odysseas.moschidis.dailypulse.screens.AboutScreen
 import com.odysseas.moschidis.dailypulse.screens.ArticlesScreen
 import com.odysseas.moschidis.dailypulse.screens.Screens

@@ -1,4 +1,4 @@
-package com.odysseas.moschidis.dailypulse.atricles
+package com.odysseas.moschidis.dailypulse.atricles.data
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

@@ -1,10 +1,10 @@
 package com.odysseas.moschidis.dailypulse.atricles.di
 
-import com.odysseas.moschidis.dailypulse.atricles.ArticlesDataSource
-import com.odysseas.moschidis.dailypulse.atricles.ArticlesRepository
-import com.odysseas.moschidis.dailypulse.atricles.ArticlesService
-import com.odysseas.moschidis.dailypulse.atricles.ArticlesUseCase
-import com.odysseas.moschidis.dailypulse.atricles.ArticlesViewModel
+import com.odysseas.moschidis.dailypulse.atricles.data.ArticlesDataSource
+import com.odysseas.moschidis.dailypulse.atricles.data.ArticlesRepository
+import com.odysseas.moschidis.dailypulse.atricles.data.ArticlesService
+import com.odysseas.moschidis.dailypulse.atricles.application.ArticlesUseCase
+import com.odysseas.moschidis.dailypulse.atricles.presentation.ArticlesViewModel
 import org.koin.dsl.module
 
 val articlesModule = module {

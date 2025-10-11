@@ -1,4 +1,4 @@
-package com.odysseas.moschidis.dailypulse.atricles
+package com.odysseas.moschidis.dailypulse.atricles.data
 
 import com.odysseas.moschidis.dailypulse.printLog
 import kotlinx.coroutines.flow.Flow

@@ -1,5 +1,7 @@
-package com.odysseas.moschidis.dailypulse.atricles
+package com.odysseas.moschidis.dailypulse.atricles.application
 
+import com.odysseas.moschidis.dailypulse.atricles.data.ArticleRaw
+import com.odysseas.moschidis.dailypulse.atricles.data.ArticlesRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.datetime.TimeZone
@@ -23,16 +25,17 @@ class ArticlesUseCase(private val repository: ArticlesRepository) {
                 title = raw.title,
                 desc = raw.desc ?: "Click to find out more",
                 date = getDaysAgo(raw.date),
-                imageUrl = raw.imageUrl ?: "https://image.cnbcfm.com/api/v1/image/107326078-1698758530118-gettyimages-1765623456-wall26362_igj6ehhp.jpeg?v=1698758587&w=1920&h=1080"
+                imageUrl = raw.imageUrl
+                    ?: "https://image.cnbcfm.com/api/v1/image/107326078-1698758530118-gettyimages-1765623456-wall26362_igj6ehhp.jpeg?v=1698758587&w=1920&h=1080"
             )
         }
     }
 
     @OptIn(ExperimentalTime::class)
     private fun getDaysAgo(date: String): String {
-        val today = Clock.System.todayIn(TimeZone.currentSystemDefault())
+        val today = Clock.System.todayIn(TimeZone.Companion.currentSystemDefault())
         val days = today.daysUntil(
-            Instant.parse(date).toLocalDateTime(TimeZone.currentSystemDefault()).date
+            Instant.Companion.parse(date).toLocalDateTime(TimeZone.Companion.currentSystemDefault()).date
         )
 
         val result = when {

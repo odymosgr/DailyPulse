@@ -1,4 +1,6 @@
-package com.odysseas.moschidis.dailypulse.atricles
+package com.odysseas.moschidis.dailypulse.atricles.presentation
+
+import com.odysseas.moschidis.dailypulse.atricles.application.Article
 
 data class ArticlesState (
     val articles: List<Article> = listOf(),

@@ -1,4 +1,4 @@
-package com.odysseas.moschidis.dailypulse.atricles
+package com.odysseas.moschidis.dailypulse.atricles.data
 
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
