@@ -1,6 +1,7 @@
 package com.odysseas.moschidis.dailypulse
 
 import android.app.Application
+import com.odysseas.moschidis.dailypulse.di.databaseModule
 import com.odysseas.moschidis.dailypulse.di.sharedKoinModules
 import com.odysseas.moschidis.dailypulse.di.viewModelsModule
 import org.koin.android.ext.koin.androidContext
@@ -14,7 +15,7 @@ class DailyPulseApp: Application() {
     }
 
     private fun initKoin() {
-        val modules = sharedKoinModules + viewModelsModule
+        val modules = sharedKoinModules + viewModelsModule + databaseModule
 
         startKoin {
             androidContext(this@DailyPulseApp)

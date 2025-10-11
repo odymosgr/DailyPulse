@@ -4,6 +4,7 @@ import com.odysseas.moschidis.dailypulse.BaseViewModel
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.serialization.kotlinx.json.json
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -22,13 +23,18 @@ class ArticlesViewModel(
         getArticles()
     }
 
-    private fun getArticles() {
+    fun getArticles(forceFetch: Boolean = false) {
         scope.launch {
+            _articlesState.value = _articlesState.value.copy(loading = true)
+            delay(500)
+
             try {
-                val fetchedArticles = useCase.getArticles()
-                _articlesState.emit(ArticlesState(articles = fetchedArticles))
+                // .collect is a suspend function that "listens" to the flow.
+                useCase.getArticles(forceFetch).collect { fetchedArticles ->
+                    _articlesState.value = ArticlesState(articles = fetchedArticles)
+                }
             } catch (e: Exception) {
-                _articlesState.emit(ArticlesState(error = e.message ?: "Something went wrong!"))
+                _articlesState.value = ArticlesState(error = e.message ?: "Something went wrong!")
             }
         }
     }

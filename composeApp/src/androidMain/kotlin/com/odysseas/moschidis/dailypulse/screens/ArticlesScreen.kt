@@ -11,8 +11,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Info
+import androidx.compose.material.pullrefresh.PullRefreshIndicator
+import androidx.compose.material.pullrefresh.pullRefresh
+import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -35,6 +39,8 @@ import com.odysseas.moschidis.dailypulse.atricles.Article
 import com.odysseas.moschidis.dailypulse.atricles.ArticlesViewModel
 import org.koin.androidx.compose.koinViewModel
 
+
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun ArticlesScreen(
     onAboutButtonClick: () -> Unit,
@@ -42,15 +48,30 @@ fun ArticlesScreen(
 ) {
     val articlesState = articlesViewModel.articlesState.collectAsState()
 
+    val pullRefreshState = rememberPullRefreshState(
+        refreshing = articlesState.value.loading,
+        onRefresh = { articlesViewModel.getArticles(forceFetch = true) }
+    )
+
     Column {
         AppBar(onAboutButtonClick)
 
-        if (articlesState.value.loading)
-            Loader()
-        if (articlesState.value.error != null)
-            ErrorMessage(articlesState.value.error!!)
-        if (articlesState.value.articles.isNotEmpty())
-            ArticlesListView(articlesState.value.articles)
+        Box(modifier = Modifier
+            .fillMaxSize()
+            .pullRefresh(pullRefreshState)
+        ) {
+
+            if (articlesState.value.error != null)
+                ErrorMessage(articlesState.value.error!!)
+            if (articlesState.value.articles.isNotEmpty())
+                ArticlesListView(articlesState.value.articles)
+
+            PullRefreshIndicator(
+                refreshing = articlesState.value.loading,
+                state = pullRefreshState,
+                modifier = Modifier.align(Alignment.TopCenter)
+            )
+        }
     }
 }
 
@@ -109,20 +130,6 @@ fun ArticleItemView(article: Article) {
             modifier = Modifier.align(Alignment.End)
         )
         Spacer(modifier = Modifier.height(4.dp))
-    }
-}
-
-@Composable
-fun Loader() {
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-        CircularProgressIndicator(
-            modifier = Modifier.width(64.dp),
-            color = MaterialTheme.colorScheme.surfaceVariant,
-            trackColor = MaterialTheme.colorScheme.secondary,
-        )
     }
 }
 

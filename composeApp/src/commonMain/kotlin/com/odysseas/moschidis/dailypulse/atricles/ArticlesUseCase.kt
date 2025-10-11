@@ -1,5 +1,7 @@
 package com.odysseas.moschidis.dailypulse.atricles
 
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.daysUntil
 import kotlinx.datetime.toLocalDateTime
@@ -9,12 +11,11 @@ import kotlin.time.Clock
 import kotlin.time.ExperimentalTime
 import kotlin.time.Instant
 
-class ArticlesUseCase(private val service: ArticlesService) {
+class ArticlesUseCase(private val repository: ArticlesRepository) {
 
-    suspend fun getArticles(): List<Article> {
-        val articlesRaw = service.fetchArticles()
-        return mapArticles(articlesRaw)
-    }
+    fun getArticles(forceFetch: Boolean): Flow<List<Article>> =
+        repository.getArticles(forceFetch).map(::mapArticles)
+
 
     private fun mapArticles(articlesRaw: List<ArticleRaw>): List<Article> {
         return articlesRaw.map { raw ->
